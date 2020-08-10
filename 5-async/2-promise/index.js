@@ -6,13 +6,16 @@ function fetchData(url) {
     xhr.open('GET', url);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=uft-8');
     // eslint-disable-next-line func-names
-    xhr.onReadyStateChange = function() {
-      if (xhr.readyState === 4 && xhr.status <= 299 && xhr >= 200) {
-        resolve(xhr);
-      } else {
-        reject(xhr);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status <= 299 && xhr.status >= 200) {
+        resolve(xhr.responseText);
       }
     };
+
+    xhr.onerror = () => {
+      reject(xhr);
+    };
+
     xhr.send();
     // end -->
   });

@@ -2,7 +2,7 @@ async function fetchData(url) {
   // <-- start
   // TODO 24: 通过await/async实现异步请求
   try {
-    const result = await fetch(url);
+    const result = await fetch(url).then(res => res.json());
     // do something
     document.writeln(result.name);
   } catch (e) {
